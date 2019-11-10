@@ -1,4 +1,5 @@
 import abc
+import logging
 import random
 
 ASK_USER_INPUT_QUESTS_TEMPLATE = [
@@ -21,6 +22,7 @@ class BaseAction(object):
         """
         is_ready_to_execute = len(self.user_inputs_needed()) == len(self._user_inputs)
         self._cur_user_input = None if is_ready_to_execute else self._cur_user_input
+        logging.info(f'Is action ready to execute? {is_ready_to_execute}')
         return is_ready_to_execute
 
     def is_in_ask_session(self):
@@ -28,6 +30,7 @@ class BaseAction(object):
         Checks if we hve asked for user inputs
         :return: true if it is, false otherwise
         """
+        logging.info(f'Are we in the session of asking for user inputs? {bool(self._cur_user_input)}')
         return bool(self._cur_user_input)
 
     def ask_for_user_input(self):
@@ -53,6 +56,7 @@ class BaseAction(object):
 
     def start(self):
         """ Starts the action execution """
+        logging.info(f'Starting the perform action - {str(self)}')
         action_response = self.perform_action(**self._user_inputs)
         self._cur_user_input = None
         return action_response
@@ -75,3 +79,6 @@ class BaseAction(object):
     def update_user_input(self, user_input):
         """ Updates the user input for the currently requested """
         self._user_inputs.update({self._cur_user_input: user_input})
+
+    def __str__(self):
+        return f'{self.__module__} - Intent [{self.intent()}]'

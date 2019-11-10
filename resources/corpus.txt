@@ -1,0 +1,20 @@
+intent	question
+noop    good
+noop    that's great
+noop    great
+noop    awesome
+noop    all good
+java	Where can I download Java from?
+java	Where can I get Java from?
+java	How can I install Java?
+java	where can I get JDK?
+java	Where can I get Java 11 from?
+greet	Hi
+greet	Hey
+greet	Hello
+greet	Hi there. How are you?
+greet	Hellooooo
+greet	Howdy!!
+thank	thanks
+thank	thank you
+	just a new question? But no label!

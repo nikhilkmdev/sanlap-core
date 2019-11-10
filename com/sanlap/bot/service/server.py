@@ -1,4 +1,5 @@
 import argparse
+import logging
 import socket
 import sys
 
@@ -36,6 +37,7 @@ class SanlapService(object):
         if not action:
             intent = self._predict_intent(data)[0]
             intent = intent or 'clueless'
+            logging.info(f'Mapped the intent to [{intent}]')
             action = ACTION_BY_INTENT[intent]
             action = action()
             self._action_by_address[address] = action
@@ -43,7 +45,10 @@ class SanlapService(object):
             action.update_user_input(data)
         if action.is_ready_to_execute():
             response = action.start()
-            connection.sendall(str(f'{response}').encode('utf-8'))
+            self._action_by_address[address] = None
+            if response:
+                connection.sendall(str(f'{response}').encode('utf-8'))
+            connection.sendall(str(f'Is there anything else I can assist you with?').encode('utf-8'))
         else:
             ask_response = action.ask_for_user_input()
             connection.sendall(str(f'{ask_response}').encode('utf-8'))
@@ -56,7 +61,12 @@ class SanlapService(object):
             self._config = yaml.load(config_file)
 
     def _init_predictor(self):
-        model_path = get_model_by_name('FirstModel', version=0.2, is_active=True)
+        model_args = self._config['model']
+        model_path = get_model_by_name(
+            model_args['name'],
+            version=model_args['version'],
+            is_active=model_args['activated']
+        )
         model = joblib.load(model_path)
         self._predictor = Predictor(model)
 

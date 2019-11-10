@@ -1,2 +1,6 @@
 server:
   port: 65432
+model:
+  name: FirstModel
+  version: 0.3
+  activated: true

@@ -14,3 +14,10 @@ The project has been mainly split into 3 parts:
 |Run Service|com/sanlap/bot/service/server.py|
 |And the Run Client|com/sanlap/bot/client/client.py|
 
+### Train
+You can train a model by running the below script:
+
+***com/sanlap/bot/train/sanlap.py*** 
+
+It takes in a configuration file as an argument which contains details about how the mmodel should be trained?
+
