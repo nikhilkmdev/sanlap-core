@@ -12,7 +12,7 @@ class DownloadJavaAction(BaseAction):
         }
 
     def intent(self):
-        return 'java'
+        return 'download_java'
 
     def user_inputs_needed(self):
         return ['version']

@@ -19,4 +19,4 @@ class GreetAction(BaseAction):
         return list()
 
     def perform_action(self, **kwargs):
-        return GREET_MESSAGES[random.randint(0, len(GREET_MESSAGES))]
+        return GREET_MESSAGES[random.randint(0, len(GREET_MESSAGES) - 1)]

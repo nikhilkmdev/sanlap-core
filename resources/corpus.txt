@@ -1,20 +1,33 @@
 intent	question
-noop    good
-noop    that's great
-noop    great
-noop    awesome
-noop    all good
-java	Where can I download Java from?
-java	Where can I get Java from?
-java	How can I install Java?
-java	where can I get JDK?
-java	Where can I get Java 11 from?
+download_java	Where can I download Java from?
+download_java	Where can I get Java from?
+download_java	How can I install Java?
+download_java	where can I get JDK?
+download_java	where can I get JRE?
+download_java	need help with downloading JRE?
+download_java	need help with downloading Java?
+download_java	where can I download JRE?
+download_java	Where can I get Java 11 from?
 greet	Hi
 greet	Hey
 greet	Hello
+greet	Hi there!
 greet	Hi there. How are you?
 greet	Hellooooo
 greet	Howdy!!
+greet	Hey. How are you today?
 thank	thanks
+thank	thanks a lot
+thank	thanks a ton
+thank	thanks. much appreciated
 thank	thank you
+no_op	good
+no_op	gooood
+no_op	that's great
+no_op	great
+no_op	awesome
+no_op	all good
+no_op	much appreciated
+no_op	yes
+no_op	yup
 	just a new question? But no label!

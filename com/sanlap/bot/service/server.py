@@ -32,8 +32,8 @@ class SanlapService(object):
         connection.sendall('Hi. How can I help you today?'.encode('utf-8'))
 
     def _on_data_received(self, connection, address, data):
+        logging.info(f'Data received {data}')
         action = self._action_by_address.get(address)
-        data = data.decode('utf-8')
         if not action:
             intent = self._predict_intent(data)[0]
             intent = intent or 'clueless'
@@ -48,7 +48,6 @@ class SanlapService(object):
             self._action_by_address[address] = None
             if response:
                 connection.sendall(str(f'{response}').encode('utf-8'))
-            connection.sendall(str(f'Is there anything else I can assist you with?').encode('utf-8'))
         else:
             ask_response = action.ask_for_user_input()
             connection.sendall(str(f'{ask_response}').encode('utf-8'))
@@ -82,13 +81,15 @@ class SanlapService(object):
         print(f'Connected to {len(self._connections)} clients')
         while True:
             for address, connection in self._connections.items():
-                # with connection:
-                print('Connected by', address)
+                logging.info(f'Connected by {address}')
                 data = connection.recv(1024)
-                self._on_data_received(connection, address, data)
+                data = data.decode('utf-8')
+                if data:
+                    self._on_data_received(connection, address, data)
 
 
 if __name__ == '__main__':
+    logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.DEBUG)
     server_config_path = sys.argv[1]
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('-config', help='The configuration file to be used to configure the service')
