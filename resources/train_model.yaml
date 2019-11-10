@@ -1,0 +1,39 @@
+- name: FirstModel
+  version: 0.2
+  activate: false
+  data:
+    pipe:
+      source: local
+      args:
+        file_path: 'D:\Users\Nikhil KM\Projects\sanlap\corpus.txt'
+        delimiter: '\t'
+    train_test_split_ratio: 0.30
+    meta:
+      label:
+        - intent
+      feature: question
+  train:
+    model:
+      name: svm
+  predict:
+    path: 'D:\Users\Nikhil KM\Projects\sanlap\'
+
+- name: FirstModel
+  version: 0.2
+  activate: true
+  data:
+    pipe:
+      source: local
+      args:
+        file_path: 'D:\Users\Nikhil KM\Projects\sanlap\corpus_clean.txt'
+        delimiter: '\t'
+    train_test_split_ratio: 0.30
+    meta:
+      label:
+        - intent
+      feature: question
+  train:
+    model:
+      name: svm
+  predict:
+    path: 'D:\Users\Nikhil KM\Projects\sanlap\'
